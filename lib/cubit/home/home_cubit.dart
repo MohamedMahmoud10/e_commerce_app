@@ -23,6 +23,7 @@ class HomePageCubit extends Cubit<HomePageStates> {
 
   static HomePageCubit get(context) => BlocProvider.of(context);
   Map<int, bool> favorites = {};
+
 //Get Home Page Banner
   void getData() {
     emit(HomePageLoadindg());
@@ -43,6 +44,7 @@ class HomePageCubit extends Cubit<HomePageStates> {
 
 //==================================================================================================================
   CategoriesModel? categoryModel;
+
 //Get Category Data
   void getCategoryData() {
     emit(CategoryLoadindg());
@@ -60,6 +62,7 @@ class HomePageCubit extends Cubit<HomePageStates> {
 
 //==================================================================================================================
   PostFavoritesModel? getFavoritesModel;
+
 //Post Favorite Product To Data Base
   void postFavoriteProduct(int productId) {
     favorites[productId] = !favorites[productId]!;
@@ -89,6 +92,7 @@ class HomePageCubit extends Cubit<HomePageStates> {
 
 //===========================================================================
   GetFavoritesModel? favoritesModel;
+
 //Get Favorite Product To Favorite Screen
   void getAllFavoritesProducts() {
     emit(GetFavoritesLoadindg());
@@ -115,6 +119,7 @@ class HomePageCubit extends Cubit<HomePageStates> {
     const TabItem(icon: Icon(Icons.favorite_border), title: 'Favorite'),
     const TabItem(icon: Icon(Icons.shopping_cart), title: 'Cart'),
   ];
+
 //Function That Toggle Between Screens On Bottom Nav Bar
   void changeBottomNavIndex(int index) {
     try {
@@ -123,6 +128,19 @@ class HomePageCubit extends Cubit<HomePageStates> {
     } catch (e) {
       emit(BottomNavBarError(e.toString()));
       log(e.toString());
+    }
+  }
+
+  //=========================================================================================
+//Change Category View
+  bool isGridView = true;
+
+  void changeGategoryView() {
+    try {
+      isGridView = !isGridView;
+      emit(ChangeCategoryViewSuccess());
+    } catch (e) {
+      emit(ChangeCategoryViewFail(e.toString()));
     }
   }
 }

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/constant/color.dart';
+import 'package:shop_app/cubit/home/home_states.dart';
 
 import '../../../cubit/home/home_cubit.dart';
 import '../../../models/shop_app_models/category_model.dart';
@@ -10,31 +12,46 @@ class CategoryScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cubit = HomePageCubit.get(context);
-
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          'Categroies',
-          style: TextStyle(fontSize: 30, color: AppColors.purple),
-        ),
-        actions: [
-          IconButton(
-              icon: const Icon(Icons.grid_view_rounded), onPressed: () {})
-        ],
-      ),
-      body: SafeArea(
-          child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1, childAspectRatio: 3),
-        itemBuilder: (context, index) => CategoryScreenView(
-          homeData: cubit.categoryModel!.data!.data![index],
-        ),
-        itemCount: cubit.categoryModel!.data!.data!.length,
-      )),
+    return BlocConsumer<HomePageCubit, HomePageStates>(
+      listener: (context, state) {
+        // TODO: implement listener
+      },
+      builder: (context, state) {
+        var cubit = HomePageCubit.get(context);
+        return Scaffold(
+          appBar: AppBar(
+            elevation: 0,
+            centerTitle: true,
+            backgroundColor: Colors.transparent,
+            title: const Text(
+              'Categroies',
+              style: TextStyle(fontSize: 30, color: AppColors.purple),
+            ),
+            actions: [
+              IconButton(
+                  icon: cubit.isGridView
+                      ? const Icon(Icons.grid_view_rounded)
+                      : const Icon(Icons.list),
+                  onPressed: () {
+                    cubit.changeGategoryView();
+                  })
+            ],
+          ),
+          body: cubit.categoryModel == null
+              ? const Center(child: CircularProgressIndicator())
+              : SafeArea(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: cubit.isGridView ? 1 : 2,
+                        childAspectRatio: cubit.isGridView ? 2 : 1),
+                    itemBuilder: (context, index) => CategoryScreenView(
+                      homeData: cubit.categoryModel!.data!.data![index],
+                    ),
+                    itemCount: cubit.categoryModel!.data!.data!.length,
+                  ),
+                ),
+        );
+      },
     );
   }
 }

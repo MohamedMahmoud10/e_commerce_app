@@ -54,3 +54,12 @@ class BottomNavBarError extends HomePageStates {
 
   BottomNavBarError(this.error);
 }
+
+//=========================================================================================================
+class ChangeCategoryViewSuccess extends HomePageStates {}
+
+class ChangeCategoryViewFail extends HomePageStates {
+  final String error;
+
+  ChangeCategoryViewFail(this.error);
+}
