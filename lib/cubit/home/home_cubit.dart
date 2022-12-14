@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/home/home_states.dart';
 import 'package:shop_app/data/api_services/api_services.dart';
+import 'package:shop_app/models/shop_app_models/get_cart_models.dart';
 import 'package:shop_app/models/shop_app_models/home_page_model.dart';
+import 'package:shop_app/models/shop_app_models/post_cart_models.dart';
 import 'package:shop_app/models/shop_app_models/post_favorites_model.dart';
 import 'package:shop_app/presntion_layer/screens/category_screen/category_screen.dart';
 import 'package:shop_app/presntion_layer/screens/home_screen/home_screen.dart';
@@ -23,6 +25,7 @@ class HomePageCubit extends Cubit<HomePageStates> {
 
   static HomePageCubit get(context) => BlocProvider.of(context);
   Map<int, bool> favorites = {};
+  Map<int, bool> cart = {};
 
 //Get Home Page Banner
   void getData() {
@@ -32,6 +35,9 @@ class HomePageCubit extends Cubit<HomePageStates> {
         homePageModel = HomePageModel.fromJson(value.data);
         for (var element in homePageModel!.data!.products) {
           favorites.addAll({element.id!: element.inFavorites!});
+          for (var element in homePageModel!.data!.products) {
+            cart.addAll({element.id!: element.inCart!});
+          }
           log(favorites.toString());
         }
         emit(HomePageSuccess());
@@ -98,9 +104,49 @@ class HomePageCubit extends Cubit<HomePageStates> {
     emit(GetFavoritesLoadindg());
     apiServices.getData(url: favoritesEndPoint, tokenUrl: token).then((value) {
       favoritesModel = GetFavoritesModel.fromJson(value.data);
+      emit(GetFavoritesSuccess());
       log(value.data.toString());
     }).catchError((error) {
       emit(GetFavoritesError(error));
+    });
+  }
+
+//==============================================================
+  //PostAllCartItemsFromUiToDataBase
+  PostCartModels? postCartModels;
+
+  void postAllCartItems(int productId) {
+    cart[productId] = !cart[productId]!;
+    emit(CartsLoadindg());
+    apiServices
+        .postData(
+            url: cartEndPoint, data: {'product_id': productId}, tokenUrl: token)
+        .then((value) {
+      postCartModels = PostCartModels.fromJson(value.data);
+      emit(CartsSuccess());
+      if (!postCartModels!.status!) {
+        cart[productId] = !cart[productId]!;
+      } else {
+        getAllCarItems();
+      }
+      emit(CartsSuccess());
+    }).catchError((error) {
+      cart[productId] = !cart[productId]!;
+      emit(CategoryError(error.toString()));
+    });
+  }
+
+//==============================================================
+  //GetAllCartItemsFromUiToDataBase
+  GetCartModels? getCartModels;
+
+  void getAllCarItems() {
+    emit(GetCartsLoadindg());
+    apiServices.getData(url: cartEndPoint, tokenUrl: token).then((value) {
+      getCartModels = GetCartModels.fromJson(value.data);
+      emit(GetCartsSuccess());
+    }).catchError((error) {
+      emit(GetCartsError(error.toString()));
     });
   }
 
@@ -130,6 +176,9 @@ class HomePageCubit extends Cubit<HomePageStates> {
       log(e.toString());
     }
   }
+
+  //=========================================================================================
+//Cart Logic
 
   //=========================================================================================
 //Change Category View

@@ -21,8 +21,8 @@ class ProductCard extends StatelessWidget {
     var cubit = HomePageCubit.get(context);
     double percent = (data.oldPrice - data.price) / data.oldPrice * 100;
     return Container(
-      padding: const EdgeInsets.only(left: 15, right: 15, top: 10),
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 10),
+      padding: const EdgeInsets.only(left: 0, right: 0, top: 10),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 9),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: AppColors.white),
       child: Column(
@@ -45,7 +45,7 @@ class ProductCard extends StatelessWidget {
                   : Container(),
               IconButton(
                 onPressed: () {
-                  log(data.id.toString());
+                  log('FavoriteItemIdIs=${data.id.toString()}');
                   cubit.postFavoriteProduct(data.id!);
                 },
                 icon: cubit.favorites[data.id]!
@@ -64,14 +64,12 @@ class ProductCard extends StatelessWidget {
               Navigator.of(context).pushNamed(
                   ProductDetailsScreen.routeNameDetail,
                   arguments: data.id!);
-              print(data.id);
+              // log('data.id');
             },
-            child: Container(
-              margin: const EdgeInsets.all(10),
-              child: CachedNetworkImage(
-                imageUrl: data.image!,
-                height: MediaQuery.of(context).size.height * 0.21,
-              ),
+            child: CachedNetworkImage(
+              imageUrl: data.image!,
+              fit: BoxFit.cover,
+              height: MediaQuery.of(context).size.height * 0.21,
             ),
           ),
           Expanded(
@@ -87,41 +85,20 @@ class ProductCard extends StatelessWidget {
             children: [
               Text('\$ ${data.price.toString()}'),
               IconButton(
-                  onPressed: () {},
-                  icon: cubit.favorites[data.id]!
-                      ? const Icon(Icons.shopping_cart)
+                  onPressed: () {
+                    cubit.postAllCartItems(data.id!);
+                    log('CartIdIs=${data.id!.toString()}');
+                  },
+                  icon: cubit.cart[data.id]!
+                      ? const Icon(
+                          Icons.shopping_cart,
+                          color: Colors.red,
+                        )
                       : const Icon(Icons.shopping_cart_outlined))
             ],
           )
         ],
       ),
     );
-    // Card(
-    //   elevation: 10,
-    //   child: Column(
-    //     children: [
-    //       CachedNetworkImage(
-    //         imageUrl: data.image!,
-    //         fit: BoxFit.cover,
-    //       ),
-    //       Row(
-    //         children: [
-    //           IconButton(
-    //             onPressed: () {
-    //               log(data.id.toString());
-    //               cubit.postFavoriteProduct(data.id!);
-    //             },
-    //             icon: CircleAvatar(
-    //               backgroundColor:
-    //                   cubit.favorites[data.id]! ? Colors.blue : Colors.grey,
-    //               radius: 20,
-    //               child: const Icon(Icons.favorite_border),
-    //             ),
-    //           )
-    //         ],
-    //       )
-    //     ],
-    //   ),
-    // );
   }
 }

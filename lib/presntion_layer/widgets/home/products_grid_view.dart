@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/presntion_layer/widgets/grid_view.dart';
 
 import '../../../models/shop_app_models/home_page_model.dart';
 import 'product_card.dart';
@@ -13,16 +14,14 @@ class ProductsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
-      physics: const ClampingScrollPhysics(),
+    return ViewGrid(
+      physics: const BouncingScrollPhysics(),
       shrinkWrap: true,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        childAspectRatio: 0.49,
-      ),
-      itemCount: homePageModel.data!.products.length,
+      crossAxisCount: 2,
+      childAspectRatio: 0.49,
       itemBuilder: (context, index) =>
           ProductCard(data: homePageModel.data!.products[index]),
+      itemCount: homePageModel.data!.products.length,
     );
   }
 }

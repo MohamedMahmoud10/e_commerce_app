@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shop_app/constant/color.dart';
+import 'package:shop_app/constant/strings.dart';
 import 'package:shop_app/cubit/login_cubit/log_in_cubit.dart';
 import 'package:shop_app/cubit/login_cubit/log_in_state.dart';
 import 'package:shop_app/network/local/cahce_helper.dart';
@@ -34,6 +35,7 @@ class LoginBody extends StatelessWidget {
                     key: 'token', value: state.shopAppLoginModel.data!.token)
                 .then((value) {
               log('userToken===========>$value');
+              token = state.shopAppLoginModel.data!.token;
               if (value) {
                 Navigator.pushAndRemoveUntil(
                     context,

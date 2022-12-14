@@ -35,6 +35,28 @@ class FavoritesError extends HomePageStates {
 }
 
 //======================================================================================
+class CartsLoadindg extends HomePageStates {}
+
+class CartsSuccess extends HomePageStates {}
+
+class CartsError extends HomePageStates {
+  final String error;
+
+  CartsError(this.error);
+}
+
+//======================================================================================
+class GetCartsLoadindg extends HomePageStates {}
+
+class GetCartsSuccess extends HomePageStates {}
+
+class GetCartsError extends HomePageStates {
+  final String error;
+
+  GetCartsError(this.error);
+}
+
+//======================================================================================
 
 class GetFavoritesLoadindg extends HomePageStates {}
 

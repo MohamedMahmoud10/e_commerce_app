@@ -1,14 +1,19 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shop_app/constant/color.dart';
-import 'package:shop_app/cubit/login_cubit/log_in_cubit.dart';
+import 'package:shop_app/cubit/register_cubit/register_cubit.dart';
+import 'package:shop_app/cubit/register_cubit/register_state.dart';
 import 'package:shop_app/presntion_layer/widgets/login/custom_button.dart';
 import 'package:shop_app/presntion_layer/widgets/signup/signup_back_ground.dart';
 
-import '../../../cubit/login_cubit/log_in_state.dart';
+import '../../../constant/strings.dart';
+import '../../../network/local/cahce_helper.dart';
+import '../../screens/home_page_layout/home_page_layout.dart';
 import '../../screens/login.dart';
 import '../login/already_have_account.dart';
 import '../login/email_form_field.dart';
@@ -24,12 +29,44 @@ class SignupBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<LoginCubit, LoginStates>(
+    return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state is RegisterSuccessState) {
+          if (state.shopAppLoginModel.status!) {
+            CacheHelper.saveData(
+                    key: 'token', value: state.shopAppLoginModel.data!.token)
+                .then((value) {
+              log('userToken===========>$value');
+              token = state.shopAppLoginModel.data!.token;
+            }).then((value) => {
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomePageLayOut()),
+                          (route) => false)
+                    });
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                state.shopAppLoginModel.message.toString(),
+              ),
+              backgroundColor: AppColors.purple,
+              elevation: 10,
+              behavior: SnackBarBehavior.floating,
+            ));
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(
+                state.shopAppLoginModel.message.toString(),
+              ),
+              backgroundColor: Colors.red,
+              elevation: 10,
+              behavior: SnackBarBehavior.floating,
+            ));
+          }
+        }
       },
       builder: (context, state) {
-        var cubit = LoginCubit.get(context);
+        var cubit = RegisterCubit.get(context);
         return SignupBackGround(
           child: ListView(children: [
             AnimationLimiter(
@@ -134,11 +171,21 @@ class SignupBody extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        CustomButton(
-                            firstColor: Colors.red[100]!,
-                            secondColor: AppColors.purple,
-                            text: 'Create an account',
-                            onTap: () {}),
+                        (state is! RegisterLoadingState)
+                            ? CustomButton(
+                                firstColor: Colors.red[100]!,
+                                secondColor: AppColors.purple,
+                                text: 'Create an account',
+                                onTap: () {
+                                  cubit.createAccount(
+                                      name: nameController.text,
+                                      email: emailController.text,
+                                      password: passwordController.text,
+                                      phone: int.parse(phoneController.text));
+                                })
+                            : const Center(
+                                child: CircularProgressIndicator(),
+                              ),
                         AlreadyHaveAccount(
                           login: false,
                           onTap: () {

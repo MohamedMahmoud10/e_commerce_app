@@ -2,17 +2,17 @@ import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/models/shop_app_models/get_cart_models.dart';
 
 import '../../../cubit/home/home_cubit.dart';
-import '../../../models/shop_app_models/get_favorites_model.dart';
 
-class FavoritesProductsView extends StatelessWidget {
-  const FavoritesProductsView({
+class CartProductsView extends StatelessWidget {
+  const CartProductsView({
     super.key,
     required this.data,
   });
 
-  final FavoritesData data;
+  final CartItems data;
 
   @override
   Widget build(BuildContext context) {

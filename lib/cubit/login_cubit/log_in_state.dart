@@ -18,3 +18,16 @@ class LoginErrorState extends LoginStates {
 
 //=========================================================================================
 class ShowPassword extends LoginStates {}
+
+//====================================================================
+class GetProfileLoadingState extends LoginStates {}
+
+class GetProfileSuccessState extends LoginStates {
+  ShopAppLoginModel shopAppLoginModel;
+  GetProfileSuccessState(this.shopAppLoginModel);
+}
+
+class GetProfileErrorState extends LoginStates {
+  final String error;
+  GetProfileErrorState(this.error);
+}

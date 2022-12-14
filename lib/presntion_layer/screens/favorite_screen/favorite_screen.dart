@@ -11,20 +11,14 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<HomePageCubit, HomePageStates>(
-      listener: (context, state) {
-        // TODO: implement listener
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         var cubit = HomePageCubit.get(context);
         return Scaffold(
-          body: cubit.favoritesModel != null
-              ? GridView.builder(
+          body: state is! FavoritesLoadindg
+              ? ListView.builder(
                   physics: const ClampingScrollPhysics(),
                   shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1 / 5,
-                  ),
                   itemCount: cubit.favoritesModel!.data!.data!.length,
                   itemBuilder: (context, index) => FavoritesProductsView(
                       data: cubit.favoritesModel!.data!.data![index]),
