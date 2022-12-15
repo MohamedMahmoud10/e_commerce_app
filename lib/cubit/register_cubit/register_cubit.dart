@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/constant/strings.dart';
@@ -11,13 +13,15 @@ class RegisterCubit extends Cubit<RegisterStates> {
   RegisterCubit() : super(RegisterInitialState());
 
   ApiServices apiServices = ApiServices();
-  ShopAppLoginModel shopAppLoginModel = ShopAppLoginModel();
+  ShopAppLoginModel? shopAppRegisterModel;
+
   static RegisterCubit get(context) => BlocProvider.of(context);
+
   void createAccount(
       {required String name,
       required String email,
-      required password,
-      required int phone}) {
+      required String password,
+      required String phone}) {
     emit(RegisterLoadingState());
     apiServices
         .postData(
@@ -30,11 +34,18 @@ class RegisterCubit extends Cubit<RegisterStates> {
             },
             tokenUrl: token)
         .then((value) {
-      shopAppLoginModel = ShopAppLoginModel.fromJson(value.data);
-      emit(RegisterSuccessState(shopAppLoginModel));
-    }).catchError((error) {
-      emit(RegisterErrorState(error.toString()));
-    });
+      shopAppRegisterModel = ShopAppLoginModel.fromJson(value.data);
+      emit(RegisterSuccessState(shopAppRegisterModel!));
+    }).catchError(
+      (error) {
+        emit(
+          RegisterErrorState(
+            error.toString(),
+          ),
+        );
+        log('The Error Is $error');
+      },
+    );
   }
 
   //===================================================================

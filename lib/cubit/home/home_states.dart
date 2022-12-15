@@ -85,3 +85,14 @@ class ChangeCategoryViewFail extends HomePageStates {
 
   ChangeCategoryViewFail(this.error);
 }
+
+//============================================================================================================
+class UpdateProfileLoadingState extends HomePageStates {}
+
+class UpdateProfileSuccessState extends HomePageStates {}
+
+class UpdateProfileErrorState extends HomePageStates {
+  final String error;
+
+  UpdateProfileErrorState(this.error);
+}

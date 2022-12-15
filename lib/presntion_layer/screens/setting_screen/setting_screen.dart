@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shop_app/constant/strings.dart';
 import 'package:shop_app/cubit/login_cubit/log_in_state.dart';
 
 import '../../../cubit/login_cubit/log_in_cubit.dart';
@@ -17,13 +20,7 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginStates>(
-      listener: (context, state) {
-        if (state is GetProfileSuccessState) {
-          // nameController.text = state.shopAppLoginModel.data!.name!;
-          // emailController.text = state.shopAppLoginModel.data!.email!;
-          // phoneController.text = state.shopAppLoginModel.data!.phone!;
-        }
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         var cubit = LoginCubit.get(context).userData;
         if (cubit != null) {
@@ -94,10 +91,27 @@ class SettingScreen extends StatelessWidget {
                                   MaterialPageRoute(
                                       builder: (context) => const LogIn()),
                                   (route) => false);
+                              log('the token is removed Success $token');
                             },
                             text: 'LogOut',
                             firstColor: Colors.black,
                             secondColor: Colors.blue,
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          CustomButton(
+                            onTap: () {
+                              BlocProvider.of<LoginCubit>(context)
+                                  .updateProfileInfo(
+                                name: nameController.text,
+                                email: emailController.text,
+                                phone: phoneController.text,
+                              );
+                            },
+                            text: 'Update Profile',
+                            firstColor: const Color(0xFF0F75BD),
+                            secondColor: const Color(0xFFA826C7),
                           )
                         ],
                       ),

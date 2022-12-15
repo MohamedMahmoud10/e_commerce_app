@@ -13,7 +13,6 @@ import 'package:shop_app/presntion_layer/widgets/signup/signup_back_ground.dart'
 
 import '../../../constant/strings.dart';
 import '../../../network/local/cahce_helper.dart';
-import '../../screens/home_page_layout/home_page_layout.dart';
 import '../../screens/login.dart';
 import '../login/already_have_account.dart';
 import '../login/email_form_field.dart';
@@ -32,22 +31,22 @@ class SignupBody extends StatelessWidget {
     return BlocConsumer<RegisterCubit, RegisterStates>(
       listener: (context, state) {
         if (state is RegisterSuccessState) {
-          if (state.shopAppLoginModel.status!) {
+          if (state.shopAppRegisterModel.status!) {
             CacheHelper.saveData(
-                    key: 'token', value: state.shopAppLoginModel.data!.token)
+                    key: 'token', value: state.shopAppRegisterModel.data!.token)
                 .then((value) {
               log('userToken===========>$value');
-              token = state.shopAppLoginModel.data!.token;
+              token = state.shopAppRegisterModel.data!.token;
             }).then((value) => {
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomePageLayOut()),
+                              builder: (context) => const LogIn()),
                           (route) => false)
                     });
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
-                state.shopAppLoginModel.message.toString(),
+                state.shopAppRegisterModel.message.toString(),
               ),
               backgroundColor: AppColors.purple,
               elevation: 10,
@@ -56,7 +55,7 @@ class SignupBody extends StatelessWidget {
           } else {
             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
               content: Text(
-                state.shopAppLoginModel.message.toString(),
+                state.shopAppRegisterModel.message.toString(),
               ),
               backgroundColor: Colors.red,
               elevation: 10,
@@ -181,7 +180,7 @@ class SignupBody extends StatelessWidget {
                                       name: nameController.text,
                                       email: emailController.text,
                                       password: passwordController.text,
-                                      phone: int.parse(phoneController.text));
+                                      phone: phoneController.text);
                                 })
                             : const Center(
                                 child: CircularProgressIndicator(),

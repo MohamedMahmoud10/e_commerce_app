@@ -7,8 +7,8 @@ class RegisterInitialState extends RegisterStates {}
 class RegisterLoadingState extends RegisterStates {}
 
 class RegisterSuccessState extends RegisterStates {
-  ShopAppLoginModel shopAppLoginModel;
-  RegisterSuccessState(this.shopAppLoginModel);
+  ShopAppLoginModel shopAppRegisterModel;
+  RegisterSuccessState(this.shopAppRegisterModel);
 }
 
 class RegisterErrorState extends RegisterStates {

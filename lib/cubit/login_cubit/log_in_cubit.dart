@@ -69,4 +69,35 @@ class LoginCubit extends Cubit<LoginStates> {
       emit(GetProfileErrorState(error.toString()));
     });
   }
+
+  //============================================================================================
+//update Profile Info
+  ShopAppLoginModel? updateUserModel;
+
+  void updateProfileInfo({
+    required String name,
+    required String email,
+    required String phone,
+  }) {
+    emit(UpdateProfileLoadingState());
+    apiServices
+        .updateData(
+            url: updateProfileEndPoint,
+            data: {
+              'name': name,
+              'email': email,
+              'phone': phone,
+            },
+            tokenUrl: token)
+        .then((value) {
+      updateUserModel = ShopAppLoginModel.fromJson(value.data);
+      emit(UpdateProfileSuccessState());
+    }).catchError((error) {
+      emit(
+        UpdateProfileErrorState(
+          error.toString(),
+        ),
+      );
+    });
+  }
 }

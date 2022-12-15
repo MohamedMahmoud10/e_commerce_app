@@ -31,3 +31,14 @@ class GetProfileErrorState extends LoginStates {
   final String error;
   GetProfileErrorState(this.error);
 }
+
+//========================================================================================
+class UpdateProfileLoadingState extends LoginStates {}
+
+class UpdateProfileSuccessState extends LoginStates {}
+
+class UpdateProfileErrorState extends LoginStates {
+  final String error;
+
+  UpdateProfileErrorState(this.error);
+}

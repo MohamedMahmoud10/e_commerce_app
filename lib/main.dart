@@ -22,9 +22,9 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   Widget widget;
   bool? onBoarding = CacheHelper.getData(key: 'onBoarding');
-  log('llllllllllllllllll${onBoarding.toString()}');
+  log('Is Boarding Removed??${onBoarding.toString()}');
   token = CacheHelper.getData(key: 'token');
-  log('llllllllllllllllll${token.toString()}');
+  log('The Token Generate Is ${token.toString()}');
 
   if (onBoarding != null) {
     if (token != null) {

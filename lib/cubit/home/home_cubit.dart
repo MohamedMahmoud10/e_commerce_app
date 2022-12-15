@@ -7,6 +7,7 @@ import 'package:shop_app/cubit/home/home_states.dart';
 import 'package:shop_app/data/api_services/api_services.dart';
 import 'package:shop_app/models/shop_app_models/get_cart_models.dart';
 import 'package:shop_app/models/shop_app_models/home_page_model.dart';
+import 'package:shop_app/models/shop_app_models/login_model.dart';
 import 'package:shop_app/models/shop_app_models/post_cart_models.dart';
 import 'package:shop_app/models/shop_app_models/post_favorites_model.dart';
 import 'package:shop_app/presntion_layer/screens/category_screen/category_screen.dart';
@@ -191,5 +192,37 @@ class HomePageCubit extends Cubit<HomePageStates> {
     } catch (e) {
       emit(ChangeCategoryViewFail(e.toString()));
     }
+  }
+
+  //============================================================================================
+//update Profile Info
+  ShopAppLoginModel? updateUserModel;
+
+  void updateProfileInfo(
+      {required String name,
+      required String email,
+      required String phone,
+      required String password}) {
+    emit(UpdateProfileLoadingState());
+    apiServices
+        .updateData(
+            url: updateProfileEndPoint,
+            data: {
+              'name': name,
+              'email': email,
+              'phone': 'phone',
+              'password': password
+            },
+            tokenUrl: token)
+        .then((value) {
+      updateUserModel = ShopAppLoginModel.fromJson(value.data);
+      emit(UpdateProfileSuccessState());
+    }).catchError((error) {
+      emit(
+        UpdateProfileErrorState(
+          error.toString(),
+        ),
+      );
+    });
   }
 }
