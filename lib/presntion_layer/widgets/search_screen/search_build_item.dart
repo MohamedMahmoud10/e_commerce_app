@@ -4,14 +4,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../cubit/home/home_cubit.dart';
+import '../../../models/shop_app_models/searc_model.dart';
 
-class FavoritesProductsView extends StatelessWidget {
-  const FavoritesProductsView({
+class SearchProductsView extends StatelessWidget {
+  const SearchProductsView({
     super.key,
     required this.data,
   });
 
-  final data;
+  final Product data;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class FavoritesProductsView extends StatelessWidget {
         children: [
           Expanded(
             child: CachedNetworkImage(
-              imageUrl: data.product!.image!,
+              imageUrl: data.image!,
               height: 180,
             ),
           ),
@@ -33,22 +34,21 @@ class FavoritesProductsView extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  data.product!.name!,
+                  data.name!,
                   maxLines: 1,
                 ),
-                Text(data.product!.price.toString()),
+                Text(data.price.toString()),
               ],
             ),
           ),
           IconButton(
             onPressed: () {
-              log(data.product!.id.toString());
-              cubit.postFavoriteProduct(data.product!.id!);
+              log(data.id.toString());
+              cubit.postFavoriteProduct(data.id!);
             },
             icon: CircleAvatar(
-              backgroundColor: cubit.favorites[data.product!.id]!
-                  ? Colors.blue
-                  : Colors.grey,
+              backgroundColor:
+                  cubit.favorites[data.id]! ? Colors.blue : Colors.grey,
               radius: 20,
               child: const Icon(Icons.favorite_border),
             ),

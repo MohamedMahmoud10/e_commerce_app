@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/home/home_cubit.dart';
 import 'package:shop_app/cubit/home/home_states.dart';
+import 'package:shop_app/presntion_layer/screens/search_screen/search_screen.dart';
 
 import '../setting_screen/setting_screen.dart';
 
@@ -28,6 +29,16 @@ class HomePageLayOut extends StatelessWidget {
               },
               icon: const Icon(Icons.settings),
             ),
+            actions: [
+              IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SearchScreen()));
+                  },
+                  icon: const Icon(Icons.search))
+            ],
           ),
           bottomNavigationBar: DefaultTabController(
             length: cubit.bottomNavScreen.length,

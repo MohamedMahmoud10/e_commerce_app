@@ -111,6 +111,7 @@ class SignupBody extends StatelessWidget {
                           validator: (value) {
                             return null;
                           },
+                          onFieldSubmitted: (String value) {},
                         ),
                         EmailFormField(
                           keyboardType: TextInputType.emailAddress,
@@ -127,7 +128,9 @@ class SignupBody extends StatelessWidget {
                               return 'Enter Your Email';
                             }
                             return null;
+                            // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
                           },
+                          onFieldSubmitted: (String value) {},
                         ),
                         PasswordFormField(
                           obscureText: cubit.obscureText,
@@ -166,6 +169,7 @@ class SignupBody extends StatelessWidget {
                           validator: (value) {
                             return null;
                           },
+                          onFieldSubmitted: (String value) {},
                         ),
                         const SizedBox(
                           height: 20,

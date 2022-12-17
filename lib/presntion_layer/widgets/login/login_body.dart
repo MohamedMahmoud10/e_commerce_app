@@ -115,6 +115,7 @@ class LoginBody extends StatelessWidget {
                               }
                               return null;
                             },
+                            onFieldSubmitted: (String) {},
                           ),
                           PasswordFormField(
                             obscureText: cubit.obscureText,

@@ -14,19 +14,21 @@ class FavoriteScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var cubit = HomePageCubit.get(context);
-        return Scaffold(
-          body: state is! FavoritesLoadindg
-              ? ListView.builder(
-                  physics: const ClampingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: cubit.favoritesModel!.data!.data!.length,
-                  itemBuilder: (context, index) => FavoritesProductsView(
-                      data: cubit.favoritesModel!.data!.data![index]),
-                )
-              : const Center(
-                  child: CircularProgressIndicator(),
-                ),
-        );
+        if (cubit.favoritesModel != null) {
+          return Scaffold(
+            body: ListView.builder(
+              physics: const ClampingScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: cubit.favoritesModel!.data!.data!.length,
+              itemBuilder: (context, index) => FavoritesProductsView(
+                  data: cubit.favoritesModel!.data!.data![index]),
+            ),
+          );
+        } else {
+          return const Center(
+            child: Text('Data Loading '),
+          );
+        }
       },
     );
   }

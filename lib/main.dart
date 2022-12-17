@@ -10,6 +10,7 @@ import 'package:shop_app/cubit/bloc_observer.dart';
 import 'package:shop_app/cubit/home/home_cubit.dart';
 import 'package:shop_app/cubit/login_cubit/log_in_cubit.dart';
 import 'package:shop_app/cubit/register_cubit/register_cubit.dart';
+import 'package:shop_app/cubit/search_cubit/search_cubit.dart';
 import 'package:shop_app/presntion_layer/screens/home_page_layout/home_page_layout.dart';
 import 'package:shop_app/presntion_layer/screens/login.dart';
 import 'package:shop_app/presntion_layer/screens/onboarding.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(create: (BuildContext context) => SearchCubit()),
         BlocProvider(create: (BuildContext context) => RegisterCubit()),
         BlocProvider(
             create: (BuildContext context) => LoginCubit()..getProfileData()),

@@ -4,7 +4,7 @@ class ViewGrid extends StatelessWidget {
   final int crossAxisCount;
   final double childAspectRatio;
 
-  final Widget? Function(BuildContext context, int index) itemBuilder;
+  final Widget Function(BuildContext context, int index) itemBuilder;
   final int itemCount;
   bool shrinkWrap;
   ScrollPhysics? physics;

@@ -29,96 +29,94 @@ class SettingScreen extends StatelessWidget {
           phoneController.text = cubit.data!.phone!;
           return Scaffold(
               appBar: AppBar(),
-              body: cubit.data != null
-                  ? SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          EmailFormField(
-                            hitText: 'Name',
-                            label: 'UserName',
-                            prefixIcon: const Icon(Icons.person),
-                            emailController: nameController,
-                            onChanged: (String value) {},
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'YouMustEnterField';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.name,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          EmailFormField(
-                            hitText: 'Email',
-                            label: 'UserEmail',
-                            prefixIcon: const Icon(Icons.alternate_email),
-                            emailController: emailController,
-                            onChanged: (String value) {},
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'YouMustEnterField';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.emailAddress,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          EmailFormField(
-                            hitText: 'Phone',
-                            label: 'UserPhone',
-                            prefixIcon: const Icon(Icons.phone),
-                            emailController: phoneController,
-                            onChanged: (String value) {},
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return 'YouMustEnterField';
-                              }
-                              return null;
-                            },
-                            keyboardType: TextInputType.phone,
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          CustomButton(
-                            onTap: () {
-                              CacheHelper.removeData(key: 'token');
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => const LogIn()),
-                                  (route) => false);
-                              log('the token is removed Success $token');
-                            },
-                            text: 'LogOut',
-                            firstColor: Colors.black,
-                            secondColor: Colors.blue,
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          CustomButton(
-                            onTap: () {
-                              BlocProvider.of<LoginCubit>(context)
-                                  .updateProfileInfo(
-                                name: nameController.text,
-                                email: emailController.text,
-                                phone: phoneController.text,
-                              );
-                            },
-                            text: 'Update Profile',
-                            firstColor: const Color(0xFF0F75BD),
-                            secondColor: const Color(0xFFA826C7),
-                          )
-                        ],
-                      ),
+              body: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    EmailFormField(
+                      hitText: 'Name',
+                      label: 'UserName',
+                      prefixIcon: const Icon(Icons.person),
+                      emailController: nameController,
+                      onChanged: (String value) {},
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'YouMustEnterField';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.name,
+                      onFieldSubmitted: (String value) {},
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    EmailFormField(
+                      hitText: 'Email',
+                      label: 'UserEmail',
+                      prefixIcon: const Icon(Icons.alternate_email),
+                      emailController: emailController,
+                      onChanged: (String value) {},
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'YouMustEnterField';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.emailAddress,
+                      onFieldSubmitted: (String value) {},
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    EmailFormField(
+                      hitText: 'Phone',
+                      label: 'UserPhone',
+                      prefixIcon: const Icon(Icons.phone),
+                      emailController: phoneController,
+                      onChanged: (String value) {},
+                      validator: (String? value) {
+                        if (value!.isEmpty) {
+                          return 'YouMustEnterField';
+                        }
+                        return null;
+                      },
+                      keyboardType: TextInputType.phone,
+                      onFieldSubmitted: (String value) {},
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    CustomButton(
+                      onTap: () {
+                        CacheHelper.removeData(key: 'token');
+                        Navigator.of(context).pushAndRemoveUntil(
+                            MaterialPageRoute(
+                                builder: (context) => const LogIn()),
+                            (route) => false);
+                        log('the token is removed Success $token');
+                      },
+                      text: 'LogOut',
+                      firstColor: Colors.black,
+                      secondColor: Colors.blue,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomButton(
+                      onTap: () {
+                        BlocProvider.of<LoginCubit>(context).updateProfileInfo(
+                          name: nameController.text,
+                          email: emailController.text,
+                          phone: phoneController.text,
+                        );
+                      },
+                      text: 'Update Profile',
+                      firstColor: const Color(0xFF0F75BD),
+                      secondColor: const Color(0xFFA826C7),
                     )
-                  : const Center(
-                      child: CircularProgressIndicator(),
-                    ));
+                  ],
+                ),
+              ));
         } else {
           return const Scaffold(
             body: Center(child: Text('Waiting until Data Loading')),

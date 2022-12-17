@@ -9,6 +9,7 @@ class EmailFormField extends StatelessWidget {
   final ValueChanged<String> onChanged;
   final FormFieldValidator<String> validator;
   final TextInputType keyboardType;
+  final ValueChanged<String> onFieldSubmitted;
 
   const EmailFormField(
       {Key? key,
@@ -18,7 +19,8 @@ class EmailFormField extends StatelessWidget {
       required this.emailController,
       required this.onChanged,
       required this.validator,
-      required this.keyboardType})
+      required this.keyboardType,
+      required this.onFieldSubmitted})
       : super(key: key);
 
   @override
@@ -29,6 +31,7 @@ class EmailFormField extends StatelessWidget {
         keyboardType: keyboardType,
         validator: validator,
         onChanged: onChanged,
+        onFieldSubmitted: onFieldSubmitted,
         controller: emailController,
         decoration: InputDecoration(
           label: Text(label),
@@ -37,7 +40,7 @@ class EmailFormField extends StatelessWidget {
           hintText: hitText,
           prefixIcon: prefixIcon,
           border: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.darkHeaderClr),
+            borderSide: const BorderSide(color: AppColors.darkHeaderClr),
             borderRadius: BorderRadius.circular(20),
           ),
           focusedBorder: OutlineInputBorder(
