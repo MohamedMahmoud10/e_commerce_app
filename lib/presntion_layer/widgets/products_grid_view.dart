@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/presntion_layer/widgets/grid_view.dart';
 
-import '../../../models/shop_app_models/home_page_model.dart';
-import 'product_card.dart';
+import '../../models/shop_app_models/home_page_model.dart';
+import '../screens/home_screen/components/product_card.dart';
 
 class ProductsView extends StatelessWidget {
   final HomePageModel homePageModel;

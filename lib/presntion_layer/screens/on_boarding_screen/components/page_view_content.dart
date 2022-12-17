@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../constant/color.dart';
-import '../../../data/data_source/static/onboarding.dart';
+import '../../../../constant/color.dart';
+import '../../../../data/data_source/static/onboarding.dart';
 
 class PageViewContent extends StatelessWidget {
   const PageViewContent({

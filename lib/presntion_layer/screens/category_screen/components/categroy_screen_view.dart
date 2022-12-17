@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constant/color.dart';
-import '../../../models/shop_app_models/category_model.dart';
+import '../../../../constant/color.dart';
+import '../../../../models/shop_app_models/category_model.dart';
 
 class CategoryScreenView extends StatelessWidget {
   final HomeData homeData;

@@ -12,8 +12,8 @@ import 'package:shop_app/cubit/login_cubit/log_in_cubit.dart';
 import 'package:shop_app/cubit/register_cubit/register_cubit.dart';
 import 'package:shop_app/cubit/search_cubit/search_cubit.dart';
 import 'package:shop_app/presntion_layer/screens/home_page_layout/home_page_layout.dart';
-import 'package:shop_app/presntion_layer/screens/login.dart';
-import 'package:shop_app/presntion_layer/screens/onboarding.dart';
+import 'package:shop_app/presntion_layer/screens/log_in_screen/login.dart';
+import 'package:shop_app/presntion_layer/screens/on_boarding_screen/onboarding.dart';
 
 import 'network/local/cahce_helper.dart';
 

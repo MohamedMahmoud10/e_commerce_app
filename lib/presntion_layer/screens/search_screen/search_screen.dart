@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/search_cubit/search_states.dart';
 
 import '../../../cubit/search_cubit/search_cubit.dart';
-import '../../widgets/login/email_form_field.dart';
-import '../../widgets/search_screen/search_build_item.dart';
+import '../../widgets/email_form_field.dart';
+import 'components/search_build_item.dart';
 
 class SearchScreen extends StatelessWidget {
   SearchScreen({Key? key}) : super(key: key);

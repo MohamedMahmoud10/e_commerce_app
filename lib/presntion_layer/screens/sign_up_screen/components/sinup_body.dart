@@ -8,15 +8,15 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:shop_app/constant/color.dart';
 import 'package:shop_app/cubit/register_cubit/register_cubit.dart';
 import 'package:shop_app/cubit/register_cubit/register_state.dart';
-import 'package:shop_app/presntion_layer/widgets/login/custom_button.dart';
-import 'package:shop_app/presntion_layer/widgets/signup/signup_back_ground.dart';
+import 'package:shop_app/presntion_layer/screens/sign_up_screen/components/signup_back_ground.dart';
 
-import '../../../constant/strings.dart';
-import '../../../network/local/cahce_helper.dart';
-import '../../screens/login.dart';
-import '../login/already_have_account.dart';
-import '../login/email_form_field.dart';
-import '../login/paswword_field.dart';
+import '../../../../constant/strings.dart';
+import '../../../../network/local/cahce_helper.dart';
+import '../../../widgets/already_have_account.dart';
+import '../../../widgets/custom_button.dart';
+import '../../../widgets/email_form_field.dart';
+import '../../../widgets/paswword_field.dart';
+import '../../log_in_screen/login.dart';
 
 class SignupBody extends StatelessWidget {
   TextEditingController nameController = TextEditingController();

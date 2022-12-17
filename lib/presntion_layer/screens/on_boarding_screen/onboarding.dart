@@ -3,12 +3,12 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:shop_app/data/data_source/static/onboarding.dart';
 import 'package:shop_app/network/local/cahce_helper.dart';
-import 'package:shop_app/presntion_layer/widgets/login/custom_button.dart';
 
-import '../../constant/color.dart';
-import '../widgets/onboarding/dot_indicator.dart';
-import '../widgets/onboarding/page_view_content.dart';
-import 'login.dart';
+import '../../../constant/color.dart';
+import '../../widgets/custom_button.dart';
+import '../log_in_screen/login.dart';
+import 'components/dot_indicator.dart';
+import 'components/page_view_content.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);

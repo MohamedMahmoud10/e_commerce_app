@@ -5,7 +5,7 @@ import 'package:shop_app/cubit/home/home_states.dart';
 import 'package:shop_app/presntion_layer/widgets/grid_view.dart';
 
 import '../../../cubit/home/home_cubit.dart';
-import '../../widgets/category/categroy_screen_view.dart';
+import 'components/categroy_screen_view.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({Key? key}) : super(key: key);

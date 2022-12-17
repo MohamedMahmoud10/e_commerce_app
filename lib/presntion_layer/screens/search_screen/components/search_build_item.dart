@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../cubit/home/home_cubit.dart';
-import '../../../models/shop_app_models/searc_model.dart';
+import '../../../../cubit/home/home_cubit.dart';
+import '../../../../models/shop_app_models/searc_model.dart';
 
 class SearchProductsView extends StatelessWidget {
   const SearchProductsView({

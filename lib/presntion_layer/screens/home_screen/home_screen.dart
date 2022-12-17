@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/home/home_cubit.dart';
 import 'package:shop_app/cubit/home/home_states.dart';
 
-import '../../widgets/home/build_carousel_slider.dart';
-import '../../widgets/home/categories.dart';
-import '../../widgets/home/products_grid_view.dart';
+import '../../widgets/products_grid_view.dart';
+import 'components/build_carousel_slider.dart';
+import 'components/categories.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

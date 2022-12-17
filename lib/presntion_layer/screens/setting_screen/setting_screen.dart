@@ -7,9 +7,9 @@ import 'package:shop_app/cubit/login_cubit/log_in_state.dart';
 
 import '../../../cubit/login_cubit/log_in_cubit.dart';
 import '../../../network/local/cahce_helper.dart';
-import '../../widgets/login/custom_button.dart';
-import '../../widgets/login/email_form_field.dart';
-import '../login.dart';
+import '../../widgets/custom_button.dart';
+import '../../widgets/email_form_field.dart';
+import '../log_in_screen/login.dart';
 
 class SettingScreen extends StatelessWidget {
   SettingScreen({Key? key}) : super(key: key);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/presntion_layer/widgets/home/categories_image_container.dart';
+import 'package:shop_app/presntion_layer/screens/home_screen/components/categories_image_container.dart';
 
-import '../../../models/shop_app_models/category_model.dart';
+import '../../../../models/shop_app_models/category_model.dart';
 
 class Categories extends StatelessWidget {
   const Categories({

@@ -11,13 +11,13 @@ import 'package:shop_app/cubit/login_cubit/log_in_cubit.dart';
 import 'package:shop_app/cubit/login_cubit/log_in_state.dart';
 import 'package:shop_app/network/local/cahce_helper.dart';
 import 'package:shop_app/presntion_layer/screens/home_page_layout/home_page_layout.dart';
-import 'package:shop_app/presntion_layer/widgets/login/already_have_account.dart';
-import 'package:shop_app/presntion_layer/widgets/login/back_ground.dart';
-import 'package:shop_app/presntion_layer/widgets/login/email_form_field.dart';
-import 'package:shop_app/presntion_layer/widgets/login/paswword_field.dart';
+import 'package:shop_app/presntion_layer/screens/log_in_screen/components/log_in_back_ground.dart';
+import 'package:shop_app/presntion_layer/widgets/already_have_account.dart';
+import 'package:shop_app/presntion_layer/widgets/paswword_field.dart';
 
-import '../../screens/signup.dart';
-import 'custom_button.dart';
+import '../../../widgets/custom_button.dart';
+import '../../../widgets/email_form_field.dart';
+import '../../sign_up_screen/signup.dart';
 
 class LoginBody extends StatelessWidget {
   LoginBody({Key? key}) : super(key: key);

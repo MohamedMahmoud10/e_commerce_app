@@ -4,9 +4,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/constant/color.dart';
 
-import '../../../cubit/home/home_cubit.dart';
-import '../../../models/shop_app_models/home_page_model.dart';
-import '../../screens/product_details_screen/product_details_screen.dart';
+import '../../../../cubit/home/home_cubit.dart';
+import '../../../../models/shop_app_models/home_page_model.dart';
+import '../../product_details_screen/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shop_app/cubit/home/home_states.dart';
 
 import '../../../cubit/home/home_cubit.dart';
-import '../../widgets/favorites/favorites_products_view.dart';
+import 'components/favorites_products_view.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({Key? key}) : super(key: key);

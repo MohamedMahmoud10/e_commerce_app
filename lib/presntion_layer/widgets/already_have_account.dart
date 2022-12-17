@@ -13,7 +13,7 @@ class AlreadyHaveAccount extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          login ? 'Dont\'t have an account?' : 'Already have an Account ?',
+          login ? 'Don\'t have an account?' : 'Already have an Account ?',
           style: Theme.of(context)
               .textTheme
               .bodySmall!
